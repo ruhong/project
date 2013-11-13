@@ -65,6 +65,9 @@ input, textarea {
   -webkit-border-radius: 0;
 	border-radius: 0; 
 }
+.center {
+	text-align: center;
+}
 .clear {
 	clear:both;
 	display:block;
@@ -88,11 +91,11 @@ body {
 }
 
 body, input, textarea {
-	font: 15px 'MerriweatherRegular', serif;
+	font: 20px 楷体,Georgia,"Times New Roman",Times,"Songti SC","SimSun",serif;
 	font-weight: normal;
 	line-height: 27px;
 	background: #2e2e2e url(style/images/bg1.jpg) repeat fixed;
-	color: #6b6b6b;
+	color: #2f2f2f;
 	-webkit-font-smoothing: antialiased;
 	-webkit-text-size-adjust: 100%;
 }
@@ -104,7 +107,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: 'MarketDecoRegular';
+	font-family: 楷体,Georgia;
 	font-weight: normal;
 	color: #ca6d6d;
 }
@@ -372,10 +375,10 @@ object {
 } */
 
 .intro {
-	font-family: 'MerriweatherRegular';
+	font-family: 楷体,Georgia;
 	font-size: 20px;
 	line-height: 32px;
-	color: #a0a0a0;
+	color: #382F2F;
 	text-align: center;
 	margin-top: -9px;
 	margin-bottom: 40px;
@@ -622,7 +625,6 @@ input#s {
 	list-style: none;
 	font-weight: normal;
 	position: relative;
-	font-family: 'MarketDecoRegular';	
 }
 #access .menu ul {
 	margin: 0;
@@ -650,7 +652,7 @@ input#s {
 #access .menu ul li a {
 	display: inline-block;
 	text-decoration: none;
-	font-size: 14px;
+	font-size: 18px;
 	line-height: 1;
 	color: #f3f3f3;
 	-webkit-transition:all 100ms ease-in;
@@ -713,6 +715,7 @@ input#s {
 	display: none;
 	width: 280px;
 	margin: 0 auto;
+	padding: 3px 0;
 }
 
 
@@ -744,17 +747,17 @@ input#s {
 	text-align: center;
 }
 .entry-title {
-	color: #ca6d6d;
+	color: #EE4141;
 	margin: 0 0 5px 0;
 	font-size: 28px; 
 }
 .entry-title,
 .entry-title a {
-	color: #ca6d6d;
+	color: #EE4141;
 	text-decoration: none;
 }
 .entry-title a:hover {
-	color: #585858;
+	color: #F00;
 }
 .entry-title span.featured-format {
 	background: url(style/images/icon-featured.png) no-repeat center center;
