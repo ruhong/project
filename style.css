@@ -65,6 +65,9 @@ input, textarea {
   -webkit-border-radius: 0;
 	border-radius: 0; 
 }
+.hide {
+	display: none;
+}
 .center {
 	text-align: center;
 }
