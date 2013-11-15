@@ -1,5 +1,4 @@
 User-agent: *
-Allow: .html$
-Disallow: /
+Disallow: /style/
 
 Sitemap: http://www.ruhong.net/sitemap.xml
