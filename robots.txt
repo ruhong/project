@@ -1,0 +1,5 @@
+User-agent: *
+Allow: .html$
+Disallow: /
+
+Sitemap: http://www.ruhong.net/sitemap.xml
