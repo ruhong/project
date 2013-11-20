@@ -6,6 +6,10 @@
 	#nav-fixed {
 		display: none;
 	}
+	.blog_video{
+		width: 500px;
+		height: 425px;
+	}
 }
 
 @media (max-width: 1140px) {
@@ -139,6 +143,10 @@
 	ul.tabs li a {
 		text-align: center;
 	}
+	.blog_video{
+		width: 400px;
+		height: 340px;
+	}
 
 }
 @media (max-width: 480px) {
@@ -169,10 +177,19 @@
 	.commentlist .children li.comment {
 		margin: 20px 0 0 20px;
 	}
+	.blog_video{
+		display: none;
+	}
+	#bdshare{
+		display: none;
+	}
+	#content{
+		margin: 0 5px;
+	}
 }
 
 @media (max-width: 320px) {
-	#content {
+	#zhaoyong_video {
 		margin: 0 29px;
 		width: auto;
 	}
@@ -198,6 +215,15 @@
 	}
 	.map.full {
 		margin: 0 -29px;
+	}
+	#zhaoyong_video{
+		display: none;
+	}
+	#bdshare{
+		display: none;
+	}
+	#content{
+		margin: 0 5px;
 	}
 }
 
