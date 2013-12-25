@@ -1,3 +1,11 @@
+.mplayer {
+    margin: 0;
+    padding: 0;
+    color: #333;
+    font: 12px Verdana,Arial,sans-serif;
+    border: 1px solid #554461;
+    background-color: #3A2A45;
+}
 .mplayer form, .mplayer dl, .mplayer dt, .mplayer dd, .mplayer ol, .mplayer ul, .mplayer li, .mplayer p{ margin:0; padding:0;}
 .mplayer ul, .mplayer li{ list-style:none;}
 .mplayer a img{ border:0;}
