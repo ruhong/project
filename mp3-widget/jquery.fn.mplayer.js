@@ -223,7 +223,7 @@
 	};	
 	$.fn.mPlayer = function(options){
 		var set = $.extend({
-			swfURL : "mplayer.swf",
+			swfURL : "mp3-widget/mplayer.swf",
 			fileDir : "meidia/",
 			mediaType : "audio",
 			playMode : 1,	//1.顺序播放 2.随机播放  3.单曲循环
