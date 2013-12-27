@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>羊皮卷</title>
+<link href="style/reset.css" rel="stylesheet" />
+<link href="style/player.css" rel="stylesheet"/>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.jplayer.min.js"></script>
+<script src="js/jquery.backstretch.min.js"></script>
+<script>
+
+$(document).ready(function(){
+    var txt = new Array();
+    var lrc = new Array();
+    var nowMusic = 0;
+
+    getLrc($("#list>ul>li:eq(0)>a>em").html());
+    $("#jp-title").empty().append($("#list>ul>li:eq(0)>a>em").html());
+
+    $("#list>ul>li:eq(0)").addClass("now");
+
+    // 获取歌词
+    function getLrc(l) {
+	    $("#lrc>ul").empty();
+	    $.ajax({
+	    	type: "GET",
+	    	url: "lrc/" + l + ".lrc",
+	    	dataType: "text",
+	    	success: function(data){
+	    	
+		    	txt = data.split("\n");
+		    	var j = 0;
+		    	var tmp = ""
+		    	for (var i = 0; i < txt.length; i++) {
+		    		tmp = txt[i].substr(10);
+		    		if(tmp){
+		    			lrc[j] = new Array();
+				    	lrc[j][0] = txt[i].substr(1,8);
+				    	lrc[j][1] = tmp;
+				    	$("#lrc>ul").append("<li>" + tmp +"</li>");
+				    	j++;
+		    		}
+
+		    	}
+		    
+
+		    	$("#lrc>div").hide();
+	    	}
+	    });
+    }
+
+    // 播放初始化
+    $("#jplayer").jPlayer({
+    	ready: function (event) {
+	    	$(this).jPlayer("setMedia", {
+	        	mp3:"music/" + $("#list>ul>li:eq(0)>a>em").html() + ".mp3"
+	    	});
+    	},
+    	timeupdate : function (obj){
+            var time1 = Math.floor(obj.jPlayer.status.currentTime);    
+
+            for (var i = 0; i < lrc.length; i++) {
+            	var time2 = new Array();
+            	time2 = lrc[i][0].split(":");
+            	var time3 = Math.floor(time2[0]) * 60 + Math.floor(time2[1]);
+            	if (time1 === time3) {    
+		            $("#lrc>ul>li").removeClass().eq(i).addClass("now");
+		            if(i>5){
+		            	$("#lrc>ul").animate({"top":  -30 * (i-5) + "px"},400,function () {return});   
+		            }
+		                   
+            	}
+            }
+            
+        },
+            
+        ended: function (event) {
+            nowMusic ++;
+            if (nowMusic > $("#list>ul>li").length - 1) {
+            nowMusic = 0;
+            }
+            $("#lrc>ul").css("top","0");
+            var music1 = $("#list>ul>li").eq(nowMusic).children("a").children("em").html();
+            $("#lrc>div").show();
+            getLrc(music1);
+            $("#jplayer").jPlayer("clearMedia").jPlayer("setMedia",{mp3:"music/" + music1 + ".mp3"}).jPlayer("play");
+            $("#jp-title").empty().append(music1);
+            $("#list>ul>li").eq(nowMusic).addClass("now").siblings("li").removeClass();
+
+        },
+    swfPath: "js",
+    supplied: "mp3",
+    wmode: "window"
+    });    
+
+    // 列表切换
+    $("#list>ul>li>a").click(function () {
+    	var music = $(this).children("em").html();
+    	$("#lrc>div").show();
+    	getLrc(music);
+    	$("#lrc>ul").css("top","0");
+    	$("#jplayer").jPlayer("clearMedia").jPlayer("setMedia",{mp3:"music/" + music + ".mp3"}).jPlayer("play");
+    	$(this).parent().addClass("now").siblings("li").removeClass();
+   	 	$("#jp-title").empty().append(music);
+    	nowMusic = $(this).parent().index();
+    });
+
+    // 列表显示隐藏
+    var _top = $("#list").height();
+    $("#list").css("top", (_top - 9) * (-1) + "px");
+
+    $("#list").click(function(){
+		$(this).stop(true).animate({
+            "top": "0"
+         },400);
+    }).mouseleave(function(){
+        $(this).stop(true).animate({
+        "top": (_top - 9) * (-1) + "px"
+        },400);
+    });
+
+    /*
+    $("#jp_container_1").mouseenter(function(){
+        $(this).animate({right: -40});
+    }).mouseleave(function(){
+        $(this).animate({right: -478});
+    });
+	*/
+	$.backstretch([
+		    "images/bg/1.jpg",
+		    "images/bg/2.jpg",
+		    "images/bg/3.jpg",
+		    "images/bg/4.jpg",
+		    "images/bg/5.jpg",
+		    "images/bg/6.jpg",
+		    "images/bg/7.jpg"
+		], {
+			fade: 750,
+			duration: 30000});
+});
+
+</script>
+
+</head>
+<body>
+	<div id="J-bg-slide"></div>
+    <div id="jp-title"></div>
+    <div id="jplayer"></div>
+    <div id="jp_container_1" class="jp-audio">
+
+	    <div class="jp-interface">
+		    <ul class="jp-controls">
+			    <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+			    <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+			    <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+			    <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+			    <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+		    </ul>
+		    <div class="jp-progress">
+			    <div class="jp-seek-bar">
+			    	<div class="jp-play-bar"></div>
+			    </div>
+		    </div>
+		    <div class="jp-volume-bar">
+		    	<div class="jp-volume-bar-value"></div>
+		    </div>
+		    <div class="jp-time-holder">
+		    	<div class="jp-current-time"></div>
+		   	 	<div class="jp-duration"></div>
+		    </div>
+	    </div>
+    </div>
+    
+    <div id="list_box">
+	    <div id="list">
+	    
+		    <ul>
+		        <li><a href="javascript:;">01. <em>羊皮卷一</em></a></li>
+		        <li><a href="javascript:;">02. <em>羊皮卷二</em></a></li>
+		        <li><a href="javascript:;">03. <em>羊皮卷三</em></a></li>
+		        <li><a href="javascript:;">04. <em>羊皮卷四</em></a></li>
+		        <li><a href="javascript:;">05. <em>羊皮卷五</em></a></li>
+		        <li><a href="javascript:;">06. <em>羊皮卷六</em></a></li>
+		        <li><a href="javascript:;">07. <em>羊皮卷七</em></a></li>
+		        <li><a href="javascript:;">08. <em>羊皮卷八</em></a></li>
+		        <li><a href="javascript:;">09. <em>羊皮卷九</em></a></li>
+		        <li><a href="javascript:;">10. <em>羊皮卷十</em></a></li>
+		    </ul>
+
+	    	<div><span></span></div>
+	    </div>
+    </div>
+
+    <div id="lrc">
+    	<div>暂无歌词</div>
+    	<ul></ul>
+    </div>
+
+    
+    <script>
+		// Or, to start a slideshow, just pass in an array of images
+		
+	</script>
+</body>
+
+</html>

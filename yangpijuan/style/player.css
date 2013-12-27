@@ -1,0 +1,289 @@
+body {
+	font-family: "Microsoft YaHei","微软雅黑";
+	text-shadow: 0 1px 0 rgba(0,0,0,0.1);
+}
+
+.jp-audio {
+	width: 558px;
+	height: 87px;
+	top: 0;
+	position: fixed;
+	right: -478px;
+	z-index: 2;
+	background: url(../images/ico_bg.png) no-repeat -358px 0;
+}
+
+
+.jp-interface {
+    height: 87px;
+    position: relative;
+    width: 558px;
+}
+
+.jp-controls {
+	list-style-type:none;
+	margin:0;
+	padding: 0;
+	overflow:hidden;
+	width: 558px;
+	height: 87px;
+}
+
+.jp-controls li {
+	display:inline;
+	float: left;
+}
+
+.jp-controls a {
+	display:block;
+	overflow:hidden;
+	text-indent:-9999px;
+}
+
+.jp-play,
+.jp-pause {
+	width:61px;
+	height:61px;
+	margin: 11px 0 0 13px;
+	outline: none;
+}
+
+.jp-play {
+	background: url(../images/ico_bg.png) no-repeat -665px -87px;
+}
+
+.jp-pause {
+	background: url(../images/ico_bg.png) no-repeat -726px -87px;
+	display: none;
+}
+
+.jp-mute,
+.jp-unmute,
+.jp-volume-max {
+	width:18px;
+	height:15px;
+	margin-top:57px;
+}
+
+.jp-mute,
+.jp-unmute {
+	margin-left: 170px;	
+}
+
+.jp-volume-max {
+	margin-left: 85px;	
+}
+
+.jp-mute {
+	background: url(../images/ico_bg.png) -787px -87px no-repeat;
+}
+.jp-mute:hover {
+	background: url(../images/ico_bg.png) -787px -102px no-repeat;
+}
+.jp-unmute {
+	background: url(../images/ico_bg.png) -823px -87px no-repeat;
+	display: none;
+}
+.jp-unmute:hover {
+	background: url(../images/ico_bg.png) -823px -102px no-repeat;
+}
+.jp-volume-max {
+	background: url(../images/ico_bg.png) -805px -87px no-repeat;
+}
+.jp-volume-max:hover {
+	background: url(../images/ico_bg.png) -805px -102px no-repeat;
+}
+
+
+.jp-progress {
+	overflow:hidden;
+	position: absolute;
+	top: 35px;
+	left: 100px;
+	height:15px;
+	width:405px;
+	background: url(../images/ico_bg.png) no-repeat -358px -159px;
+}
+
+.jp-seek-bar {
+	width:0px;
+	height:100%;
+	cursor: pointer;
+}
+
+.jp-play-bar {
+	background: url(../images/ico_bg.png) no-repeat -358px -174px;
+	width:0px;
+	height:100%;
+}
+
+.jp-volume-bar {
+	position: absolute;
+	overflow:hidden;
+	background: url(../images/ico_bg.png) no-repeat -787px -129px;
+	width:63px;
+	height:6px;
+	cursor: pointer;
+	top:63px;
+	left:267px;
+}
+
+.jp-volume-bar-value {
+	background: url(../images/ico_bg.png) no-repeat -787px -123px;
+	width:0px;
+	height:6px;
+}
+
+.jp-time-holder {
+	position:absolute;
+	top:0;
+	left:100px;
+	width:405px;
+}
+
+.jp-current-time,
+.jp-duration {
+	width:60px;
+	font: 14px/24px Arial;
+	color: #4d4d4d;
+	position: relative;
+	top: 50px;
+}
+.jp-current-time {
+	float: left;
+	padding-left: 10px;
+	display:inline;
+}
+.jp-duration {
+	float: right;
+	display:inline;
+	text-align: right;
+	padding-right: 10px;
+}
+
+.jp-jplayer audio,
+.jp-jplayer {
+	width:0px;
+	height:0px;
+}
+
+#jp-title {
+	text-align:center;
+	width:500px;
+	font-size: 22px;
+	color: #fff;
+	text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+	margin: 130px auto 0 auto;
+}
+
+#list_box {
+	width: 358px;
+	height: 500px;
+	position: fixed;
+	left: -150px;
+	top: -11px;
+	z-index: 1;
+	overflow: hidden;
+}
+
+#list {
+	width: 358px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: url(../images/ico_bg.png) repeat-y 0 0;
+}
+
+#list ul {
+	width: 307px;
+	margin: 12px auto 30px auto;
+	line-height: 36px;
+}
+
+#list ul li {
+	position: relative;
+	text-indent: 150px;
+}
+
+#list ul li a {
+	height: 36px;
+	display: block;
+	padding: 0 20px 0 0;
+	color: #4d4d4d;
+	font-size: 14px;
+	text-decoration: none;
+	background: url(../images/line_bg.png) no-repeat center bottom;
+}
+
+#list ul li a:hover {
+	background: url(../images/ico_bg.png) no-repeat -358px -87px;
+}
+
+#list ul li.now a,
+#list ul li.now a:hover {
+	color: #fff;
+	background: url(../images/ico_bg.png) no-repeat -358px -123px;
+}
+
+#list ul li.now a,
+#list ul li.now span {
+	color: #fff;
+	text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+#list ul li span {
+	display: block;
+	position: absolute;
+	width: 50px;
+	right: 0;
+	top: 0;
+	font-size: 12px;
+	color: #a5a5a5;
+	text-align: right;
+	padding-right: 10px;
+}
+
+#list div {
+	width: 358px;
+	height: 17px;
+	position: absolute;
+	left: 0;
+	bottom: -17px;
+	background: url(../images/ico_bg.png) no-repeat -358px -189px;
+}
+
+#list div span {
+	display: block;
+	margin: 0 auto;
+	width: 70px;
+	height: 12px;
+	cursor: pointer;
+}
+
+#lrc {
+	width: 500px;
+	margin: 30px auto 0 auto;
+	height: 370px;
+	overflow: hidden;
+	font-size: 12px;
+	position: relative;
+	font-size: 16px;
+	color: #1a1a1a;
+	text-align: center;
+}
+#lrc ul {
+	margin: 0;
+	position: absolute;
+	width: 500px;
+	top: 0;
+	left: 0;
+}
+#lrc ul li {
+	list-style-type: none;
+	line-height: 30px;	
+}
+#lrc li.now {
+	color: #df1d74;
+	font-size: 24px;
+	line-height: 40px;
+}
