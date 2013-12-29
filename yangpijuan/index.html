@@ -83,19 +83,6 @@ $(document).ready(function(){
         },
             
         ended: function (event) {
-			/*
-            nowMusic ++;
-            if (nowMusic > $("#list>ul>li").length - 1) {
-            nowMusic = 0;
-            }
-            $("#lrc>ul").css("top","0");
-            var music1 = $("#list>ul>li").eq(nowMusic).children("a").children("em").html();
-            $("#lrc>div").show();
-            getLrc(music1);
-            $("#jplayer").jPlayer("clearMedia").jPlayer("setMedia",{mp3:"music/" + music1 + ".mp3"}).jPlayer("play");
-            $("#jp-title").empty().append(music1);
-            $("#list>ul>li").eq(nowMusic).addClass("now").siblings("li").removeClass();
-			*/
 			$("#jplayer").jPlayer("stop");
 			$(".jp-pause").css({"display":"none"});
 			$("#lrc>ul").css("top","0");
@@ -169,7 +156,6 @@ $(document).ready(function(){
 </head>
 <body>
 	
-	<div id="J-bg-slide"></div>
     <div id="jplayer"></div>
     <div id="jp_container_1" class="jp-audio">
 	    <div class="jp-interface">
@@ -220,11 +206,6 @@ $(document).ready(function(){
     	<ul></ul>
     </div>
 
-    
-    <script>
-		// Or, to start a slideshow, just pass in an array of images
-		
-	</script>
 </body>
 
 </html>
