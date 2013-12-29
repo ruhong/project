@@ -52,7 +52,6 @@ $(document).ready(function(){
 
 		    	}
 		    
-
 		    	$("#lrc>div").hide();
 	    	}
 	    });
@@ -63,7 +62,7 @@ $(document).ready(function(){
     	ready: function (event) {
 	    	$(this).jPlayer("setMedia", {
 	        	mp3:"music/" + $("#list>ul>li:eq(0)>a>em").html() + ".mp3"
-	    	});
+	    	}).jPlayer('volume',0.5);
     	},
     	timeupdate : function (obj){
             var time1 = Math.floor(obj.jPlayer.status.currentTime);    
@@ -114,7 +113,7 @@ $(document).ready(function(){
     	$("#lrc>div").show();
     	getLrc(music);
     	$("#lrc>ul").css("top","0");
-    	$("#jplayer").jPlayer("clearMedia").jPlayer("setMedia",{mp3:"music/" + music + ".mp3"}).jPlayer("play");
+    	$("#jplayer").jPlayer("clearMedia").jPlayer("setMedia",{mp3:"music/" + music + ".mp3"}).jPlayer('volume', 0.5).jPlayer("play");
     	$(this).parent().addClass("now").siblings("li").removeClass();
    	 	$("#jp-title").empty().append(music);
     	nowMusic = $(this).parent().index();
@@ -134,15 +133,25 @@ $(document).ready(function(){
         },400);
     });
 	
+	$('.J-volume').click(function(){
+		var $this = $(this);
+		if($this.hasClass('icon-volume-medium')){
+			$("#jplayer").jPlayer("volume", 0.8);
+			$this.removeClass('icon-volume-medium').addClass('icon-volume-high');
+			
+		}else{
+			$("#jplayer").jPlayer("volume", 0.5);
+			$this.removeClass('icon-volume-high').addClass('icon-volume-medium');
+		}
+	});
 	
 	
-    /*
-    $("#jp_container_1").mouseenter(function(){
-        $(this).animate({right: -40});
-    }).mouseleave(function(){
-        $(this).animate({right: -478});
-    });
-	*/
+	$('.jp-controls').mouseenter(function(){
+		$('.J-home, .J-volume').css('visibility','visible');
+	}).mouseleave(function(){
+		$('.J-home, .J-volume').css('visibility','hidden');
+	});
+	
 	$.backstretch([
 		    "images/bg/1.jpg",
 		    "images/bg/2.jpg",
@@ -159,21 +168,26 @@ $(document).ready(function(){
 
 </head>
 <body>
+	
 	<div id="J-bg-slide"></div>
     <div id="jplayer"></div>
     <div id="jp_container_1" class="jp-audio">
-
 	    <div class="jp-interface">
 		    <div class="jp-controls">
-			    <a href="javascript:;" class="jp-play" tabindex="1">play</a>
-			    <a href="javascript:;" class="jp-pause" tabindex="1" style="display:none;">pause</a>
-		    </div>
+				<a class="J-home icon icon-home" href="http://wwww.ruhong.net" target="_blank" title="主页"></a>
+			    <a href="javascript:;" class="jp-play icon icon-play" title="播放"></a>
+			    <a href="javascript:;" class="jp-pause icon icon-pause" style="display:none;" title="暂停"></a>
+				<a href="javascript:;" class="J-volume icon icon-volume icon-volume-medium" title="调节音量"></a>			
+			</div>
+
 			<div id="jp-title"></div>
+			
 		    <div class="jp-progress">
 			    <div class="jp-seek-bar">
 			    	<div class="jp-play-bar"></div>
 			    </div>
 		    </div>
+			
 		    <div class="jp-time-holder" style="display:none;">
 		    	<div class="jp-current-time"></div>
 		   	 	<div class="jp-duration"></div>

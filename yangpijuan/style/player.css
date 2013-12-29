@@ -3,41 +3,96 @@ body {
 	text-shadow: 0 1px 0 rgba(0,0,0,0.1);
 }
 
-.jp-audio {
 
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot');
+	src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/icomoon.woff') format('woff'),
+		url('../fonts/icomoon.ttf') format('truetype'),
+		url('../fonts/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
 
 
 .jp-interface {
-
-}
-
-.jp-controls a {
-	overflow:hidden;
-	text-indent:-9999px;
-}
-
-.jp-controls {
-	margin-top: 100px;
 	text-align: center;
 }
 
-.jp-play,
-.jp-pause {
+
+
+.jp-controls {
 	display: inline-block;
-	width:61px;
-	height:61px;
+	cursor: default;
+	margin-top: 100px;
+
+}
+
+.jp-controls a{
+	display: inline-block;
+	width: 45px;
+	margin: 0 2px 0;
+	color: #333;
+	text-align: left;
+}
+
+.icon {
+	font-size: 32px;
+	color: #f1f1f1;
+	text-decoration: none;
 	outline: none;
-	text-indent: -9999px;
 }
 
-.jp-play {
-	background: url(../images/ico_bg.png) no-repeat -665px -87px;
+.icon-home {
+	visibility: hidden;
 }
 
-.jp-pause {
-	background: url(../images/ico_bg.png) no-repeat -726px -87px;
+.icon-home:before {
+	content: "\e600";
 }
+
+
+.icon-play:before {
+	content: "\e613";
+}
+
+.icon-pause:before {
+	content: "\e613";
+	color: #5b2b61;
+}
+
+.icon-volume {
+	visibility: hidden;
+}
+
+.icon-volume-low:before {
+	content: "\e60f";
+}
+
+.icon-volume-medium:before {
+	content: "\e60e";
+}
+
+.icon-volume-high:before {
+	content: "\e60d";
+}
+
 
 .jp-mute,
 .jp-unmute,
@@ -125,6 +180,14 @@ body {
 	color: #000;
 	text-shadow: 0 1px 3px rgba(0,0,0,0.1);
 	margin: 20px auto 0 auto;
+}
+
+#J-song-list {
+	cursor: pointer;
+}
+
+#J-song-list ul {
+	display: none;
 }
 
 #list_box {
