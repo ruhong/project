@@ -134,9 +134,9 @@ $(document).ready(function(){
 	
 	
 	$('.jp-controls').mouseenter(function(){
-		$('.J-home, .J-volume').css('visibility','visible');
+		$('.J-home, .J-volume, .J-about').css('visibility','visible');
 	}).mouseleave(function(){
-		$('.J-home, .J-volume').css('visibility','hidden');
+		$('.J-home, .J-volume, .J-about').css('visibility','hidden');
 	});
 	
 	$.backstretch([
@@ -164,6 +164,7 @@ $(document).ready(function(){
 			    <a href="javascript:;" class="jp-play icon icon-play" title="播放"></a>
 			    <a href="javascript:;" class="jp-pause icon icon-pause" style="display:none;" title="暂停"></a>
 				<a href="javascript:;" class="J-volume icon icon-volume icon-volume-medium" title="调节音量"></a>			
+				<a href="info.html" class="J-about icon icon-about" target="_blank" title="关于羊皮卷"></a>
 			</div>
 
 			<div id="jp-title"></div>

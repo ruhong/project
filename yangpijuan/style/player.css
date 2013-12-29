@@ -1,6 +1,8 @@
 body {
 	font-family: "Microsoft YaHei","微软雅黑";
 	text-shadow: 0 1px 0 rgba(0,0,0,0.1);
+	min-width: 600px;
+	overflow: hidden;
 }
 
 
@@ -41,6 +43,7 @@ body {
 	display: inline-block;
 	cursor: default;
 	margin-top: 100px;
+	padding-left: 60px;
 
 }
 
@@ -59,7 +62,7 @@ body {
 	outline: none;
 }
 
-.icon-home {
+.icon-home, .icon-volume, .icon-about {
 	visibility: hidden;
 }
 
@@ -77,10 +80,6 @@ body {
 	color: #5b2b61;
 }
 
-.icon-volume {
-	visibility: hidden;
-}
-
 .icon-volume-low:before {
 	content: "\e60f";
 }
@@ -93,6 +92,9 @@ body {
 	content: "\e60d";
 }
 
+.icon-about:before {
+	content: "\e603";
+}
 
 .jp-mute,
 .jp-unmute,
@@ -300,4 +302,14 @@ body {
 	color: #df1d74;
 	font-size: 24px;
 	line-height: 40px;
+}
+
+
+.info {
+	width: 600px;
+	margin: 130px auto 0;
+}
+
+.info h1 {
+	font-size: 32px;
 }
