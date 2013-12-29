@@ -41,7 +41,12 @@ $(document).ready(function(){
 		    			lrc[j] = new Array();
 				    	lrc[j][0] = txt[i].substr(1,8);
 				    	lrc[j][1] = tmp;
-				    	$("#lrc>ul").append("<li>" + tmp +"</li>");
+						if(j==0){
+							$("#lrc>ul").append("<li class='now'>" + tmp +"</li>");
+						}else{
+							$("#lrc>ul").append("<li>" + tmp +"</li>");
+						}
+				    	
 				    	j++;
 		    		}
 
