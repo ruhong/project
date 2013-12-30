@@ -44,7 +44,7 @@ body {
 	cursor: default;
 	margin-top: 100px;
 	padding-left: 60px;
-
+	background: transparent url(../images/blank.gif) repeat 0 0;
 }
 
 .jp-controls a{
