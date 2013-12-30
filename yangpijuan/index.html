@@ -14,9 +14,11 @@
 <script>
 
 $(document).ready(function(){
-    var txt = new Array();
-    var lrc = new Array();
-    var nowMusic = 0;
+    var txt,
+        lrc,
+        lrcTime,
+        nowMusic = 0,
+        timeUpdateCounter = 0;
 
     getLrc($("#list>ul>li:eq(0)>a>em").html());
     $("#jp-title").empty().append($("#list>ul>li:eq(0)>a>em").html());
@@ -26,26 +28,36 @@ $(document).ready(function(){
     // 获取歌词
     function getLrc(l) {
 	    $("#lrc>ul").empty();
+        txt = [];
+        lrc = [];
+        lrcTime = [];
 	    $.ajax({
 	    	type: "GET",
 	    	url: encodeURI("lrc/" + l + ".lrc"),
 	    	dataType: "text",
 	    	success: function(data){
+                var i = 0,
+                    j = 0,
+                    len = 0,
+                    tmp = '',
+                    time1 = 0,
+                    time2 = 0;
+
 		    	txt = data.split("\n");
-		    	var j = 0;
-		    	var tmp = ""
-		    	for (var i = 0; i < txt.length; i++) {
+                len = txt.length;
+		    	for (; i < len; i++) {
 		    		tmp = txt[i].substr(10);
 		    		if(tmp){
-		    			lrc[j] = new Array();
-				    	lrc[j][0] = txt[i].substr(1,8);
+		    			lrc[j] = [];
+                        time1 = txt[i].substr(1,8).split(":");
+                        time2 = Math.floor(time1[0]) * 60 + Math.floor(time1[1]);
+				    	lrc[j][0] = time2;
 				    	lrc[j][1] = tmp;
 						if(j==0){
 							$("#lrc>ul").append("<li class='now'>" + tmp +"</li>");
 						}else{
 							$("#lrc>ul").append("<li>" + tmp +"</li>");
 						}
-				    	
 				    	j++;
 		    		}
 
@@ -66,26 +78,23 @@ $(document).ready(function(){
     	timeupdate : function (obj){
             var time1 = Math.floor(obj.jPlayer.status.currentTime);    
 
-            for (var i = 0; i < lrc.length; i++) {
-            	var time2 = new Array();
-            	time2 = lrc[i][0].split(":");
-            	var time3 = Math.floor(time2[0]) * 60 + Math.floor(time2[1]);
-            	if (time1 === time3) {    
+            for (var i = timeUpdateCounter; i < lrc.length; i++) {
+            	if (time1 === lrc[i][0]) {    
 		            $("#lrc>ul>li").removeClass().eq(i).addClass("now");
 		            if(i>5){
-		            	$("#lrc>ul").animate({"top":  -30 * (i-5) + "px"},400,function () {return});   
+		            	$("#lrc>ul").animate({"top":  -30 * (i-5) + "px"},400);   
 		            }
-		                   
+                    timeUpdateCounter++;
+		            break;
             	}
             }
             
         },
             
         ended: function (event) {
-			$("#jplayer").jPlayer("stop");
 			$(".jp-pause").css({"display":"none"});
 			$("#lrc>ul").css("top","0");
-			$("#list>ul>li").eq(0).addClass("now").siblings("li").removeClass();
+			$("#lrc>ul>li").eq(0).addClass("now").siblings("li").removeClass();
 			
         },
     swfPath: "js",
@@ -93,8 +102,14 @@ $(document).ready(function(){
     wmode: "window"
     });    
 
+    $('#jplayer').bind($.jPlayer.event.seeked, function(){
+        timeUpdateCounter = 0;
+    });
+
     // 列表切换
     $("#list>ul>li>a").click(function () {
+        timeUpdateCounter = 0;
+        
     	var music = $(this).children("em").html();
     	$("#lrc>div").show();
     	getLrc(music);
