@@ -8,9 +8,9 @@
 <meta name="description" content="羊皮卷朗诵附带歌词" />
 <link href="style/reset.css" rel="stylesheet" />
 <link href="style/player.css" rel="stylesheet"/>
-<script src="//libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="//yangpijuan.qiniudn.com/jquery/jquery-1.8.3.min.js"></script>
 <script src="//cdn.jsdelivr.net/jplayer/2.4.1/jquery.jplayer.min.js"></script>
-<script src="//cdn.jsdelivr.net/jquery.backstretch/2.0.3/jquery.backstretch.min.js"></script>
+<script src="//yangpijuan.qiniudn.com/jquery/jquery.backstretch.min.js"></script>
 <script>
 
 $(document).ready(function(){
@@ -33,7 +33,7 @@ $(document).ready(function(){
         lrcTime = [];
 	    $.ajax({
 	    	type: "GET",
-	    	url: encodeURI("lrc/" + l + ".lrc"),
+	    	url: "//yangpijuan.qiniudn.com/lrc/"+encodeURI(l) + ".lrc",
 	    	dataType: "text",
 	    	success: function(data){
                 var i = 0,
@@ -72,7 +72,7 @@ $(document).ready(function(){
     $("#jplayer").jPlayer({
     	ready: function (event) {
 	    	$(this).jPlayer("setMedia", {
-	        	mp3:"http://yangpijuan.qiniudn.com/music/" + encodeURI($("#list>ul>li:eq(0)>a>em").html()) + ".mp3"
+	        	mp3:"//yangpijuan.qiniudn.com/music/" + encodeURI($("#list>ul>li:eq(0)>a>em").html()) + ".mp3"
 	    	}).jPlayer('volume',0.5);
     	},
     	timeupdate : function (obj){
@@ -114,7 +114,7 @@ $(document).ready(function(){
     	$("#lrc>div").show();
     	getLrc(music);
     	$("#lrc>ul").css("top","0");
-    	$("#jplayer").jPlayer("clearMedia").jPlayer("setMedia",{mp3:"http://yangpijuan.qiniudn.com/music/" + encodeURI(music) + ".mp3"}).jPlayer('volume', 0.5).jPlayer("play");
+    	$("#jplayer").jPlayer("clearMedia").jPlayer("setMedia",{mp3:"//yangpijuan.qiniudn.com/music/" + encodeURI(music) + ".mp3"}).jPlayer('volume', 0.5).jPlayer("play");
     	$(this).parent().addClass("now").siblings("li").removeClass();
    	 	$("#jp-title").empty().append(music);
     	nowMusic = $(this).parent().index();
@@ -154,12 +154,12 @@ $(document).ready(function(){
 
 	
 	$.backstretch([
-		    "http://yangpijuan.qiniudn.com/1.jpg",
-            "http://yangpijuan.qiniudn.com/2.jpg",
-            "http://yangpijuan.qiniudn.com/3.jpg",
-            "http://yangpijuan.qiniudn.com/4.jpg",
-            "http://yangpijuan.qiniudn.com/5.jpg",
-            "http://yangpijuan.qiniudn.com/6.jpg"
+		    "//yangpijuan.qiniudn.com/1.jpg",
+            "//yangpijuan.qiniudn.com/2.jpg",
+            "//yangpijuan.qiniudn.com/3.jpg",
+            "//yangpijuan.qiniudn.com/4.jpg",
+            "//yangpijuan.qiniudn.com/5.jpg",
+            "//yangpijuan.qiniudn.com/6.jpg"
 		], {
 			fade: 750,
 			duration: 30000});
