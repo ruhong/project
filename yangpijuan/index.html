@@ -28,10 +28,9 @@ $(document).ready(function(){
 	    $("#lrc>ul").empty();
 	    $.ajax({
 	    	type: "GET",
-	    	url: "lrc/" + l + ".lrc",
+	    	url: encodeURI("lrc/" + l + ".lrc"),
 	    	dataType: "text",
 	    	success: function(data){
-	    	
 		    	txt = data.split("\n");
 		    	var j = 0;
 		    	var tmp = ""
@@ -131,13 +130,13 @@ $(document).ready(function(){
 			$this.removeClass('icon-volume-high').addClass('icon-volume-medium');
 		}
 	});
-	
-	
-	$('.jp-controls').mouseenter(function(){
-		$('.J-home, .J-volume, .J-about').css('visibility','visible');
-	}).mouseleave(function(){
-		$('.J-home, .J-volume, .J-about').css('visibility','hidden');
-	});
+	$('.jp-controls').hover(function(){
+        $('.J-home, .J-volume, .J-about').css('visibility','visible');
+    },function(){
+        $('.J-home, .J-volume, .J-about').css('visibility','hidden');
+    });
+
+
 	
 	$.backstretch([
 		    "images/bg/1.jpg",
@@ -163,7 +162,7 @@ $(document).ready(function(){
 				<a class="J-home icon icon-home" href="/" target="_blank" title="主页"></a>
 			    <a href="javascript:;" class="jp-play icon icon-play" title="播放"></a>
 			    <a href="javascript:;" class="jp-pause icon icon-pause" style="display:none;" title="暂停"></a>
-				<a href="javascript:;" class="J-volume icon icon-volume icon-volume-medium" title="调节音量"></a>			
+				<a href="javascript:;" class="J-volume icon icon-volume icon-volume-medium" title="调节音量"></a>
 				<a href="info.html" class="J-about icon icon-about" target="_blank" title="关于羊皮卷"></a>
 			</div>
 
