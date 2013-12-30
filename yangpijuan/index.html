@@ -72,7 +72,7 @@ $(document).ready(function(){
     $("#jplayer").jPlayer({
     	ready: function (event) {
 	    	$(this).jPlayer("setMedia", {
-	        	mp3:"music/" + $("#list>ul>li:eq(0)>a>em").html() + ".mp3"
+	        	mp3:"http://yangpijuan.qiniudn.com/music/" + encodeURI($("#list>ul>li:eq(0)>a>em").html()) + ".mp3"
 	    	}).jPlayer('volume',0.5);
     	},
     	timeupdate : function (obj){
@@ -114,7 +114,7 @@ $(document).ready(function(){
     	$("#lrc>div").show();
     	getLrc(music);
     	$("#lrc>ul").css("top","0");
-    	$("#jplayer").jPlayer("clearMedia").jPlayer("setMedia",{mp3:"music/" + music + ".mp3"}).jPlayer('volume', 0.5).jPlayer("play");
+    	$("#jplayer").jPlayer("clearMedia").jPlayer("setMedia",{mp3:"http://yangpijuan.qiniudn.com/music/" + encodeURI(music) + ".mp3"}).jPlayer('volume', 0.5).jPlayer("play");
     	$(this).parent().addClass("now").siblings("li").removeClass();
    	 	$("#jp-title").empty().append(music);
     	nowMusic = $(this).parent().index();
