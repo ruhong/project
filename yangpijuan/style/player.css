@@ -55,6 +55,10 @@ body {
 	text-align: left;
 }
 
+.jp-controls a:hover {
+	color: #5b2b61;
+}
+
 .icon {
 	font-size: 32px;
 	color: #f1f1f1;
