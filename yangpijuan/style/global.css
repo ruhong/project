@@ -1,0 +1,353 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre, 
+form,fieldset,input,textarea,p,blockquote,th,td { 
+    padding: 0; 
+    margin: 0; 
+} 
+table { 
+    border-collapse: collapse; 
+    border-spacing: 0; 
+} 
+fieldset,img { 
+    border: 0; 
+} 
+address,caption,cite,code,dfn,em,strong,th,var { 
+    font-weight: normal; 
+    font-style: normal; 
+} 
+ol,ul { 
+    list-style: none; 
+} 
+caption,th { 
+    text-align: left; 
+} 
+h1,h2,h3,h4,h5,h6 { 
+    font-weight: normal; 
+    font-size: 100%; 
+} 
+q:before,q:after { 
+    content:”; 
+} 
+abbr,acronym { 
+    border: 0; 
+}
+
+body {
+    font-family: "Microsoft YaHei","微软雅黑";
+    text-shadow: 0 1px 0 rgba(0,0,0,0.1);
+    min-width: 600px;
+    overflow: hidden;
+}
+
+
+@font-face {
+    font-family: 'icomoon';
+    src:url('../fonts/icomoon.eot');
+    src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.woff') format('woff'),
+        url('../fonts/icomoon.ttf') format('truetype'),
+        url('../fonts/icomoon.svg#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+.jp-interface {
+    text-align: center;
+}
+
+
+
+.jp-controls {
+    display: inline-block;
+    cursor: default;
+    margin-top: 100px;
+    padding-left: 60px;
+    background: transparent url(../images/blank.gif) repeat 0 0;
+}
+
+.jp-controls a{
+    display: inline-block;
+    width: 45px;
+    margin: 0 2px 0;
+    color: #333;
+    text-align: left;
+}
+
+.jp-controls a:hover {
+    color: #5b2b61;
+}
+
+.icon {
+    font-size: 32px;
+    color: #f1f1f1;
+    text-decoration: none;
+    outline: none;
+}
+
+.icon-home, .icon-volume, .icon-about {
+    visibility: hidden;
+}
+
+.icon-home:before {
+    content: "\e600";
+}
+
+
+.icon-play:before {
+    content: "\e613";
+}
+
+.icon-pause:before {
+    content: "\e613";
+    color: #5b2b61;
+}
+
+.icon-volume-low:before {
+    content: "\e60f";
+}
+
+.icon-volume-medium:before {
+    content: "\e60e";
+}
+
+.icon-volume-high:before {
+    content: "\e60d";
+}
+
+.icon-about:before {
+    content: "\e603";
+}
+
+.jp-mute,
+.jp-unmute,
+.jp-volume-max {
+    display: none;
+}
+
+
+.jp-progress {
+    width: 100%;
+    height: 5px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.jp-seek-bar {
+    width:100%;
+    height:100%;
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.jp-play-bar {
+    background-color: #32c6ff;
+    width:0;
+    height:100%;
+    border-radius: 1px;
+}
+
+.jp-volume-bar {
+    position: absolute;
+    overflow:hidden;
+    background: url(../images/ico_bg.png) no-repeat -787px -129px;
+    width:63px;
+    height:6px;
+    cursor: pointer;
+    top:63px;
+    left:267px;
+}
+
+.jp-volume-bar-value {
+    background: url(../images/ico_bg.png) no-repeat -787px -123px;
+    width:0px;
+    height:6px;
+}
+
+.jp-time-holder {
+    position:absolute;
+    top:0;
+    left:100px;
+    width:405px;
+}
+
+.jp-current-time,
+.jp-duration {
+    width:60px;
+    font: 14px/24px Arial;
+    color: #4d4d4d;
+    position: relative;
+    top: 50px;
+}
+.jp-current-time {
+    float: left;
+    padding-left: 10px;
+    display:inline;
+}
+.jp-duration {
+    float: right;
+    display:inline;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.jp-jplayer audio,
+.jp-jplayer {
+    width:0px;
+    height:0px;
+}
+
+#jp-title {
+    text-align:center;
+    width:500px;
+    font-size: 22px;
+    color: #000;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin: 20px auto 0 auto;
+}
+
+#J-song-list {
+    cursor: pointer;
+}
+
+#J-song-list ul {
+    display: none;
+}
+
+#list_box {
+    visibility: hidden;
+    width: 358px;
+    height: 500px;
+    position: fixed;
+    left: -150px;
+    top: -11px;
+    z-index: 1;
+    overflow: hidden;
+}
+
+#list {
+    width: 358px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url(../images/ico_bg.png) repeat-y 0 0;
+}
+
+#list ul {
+    width: 307px;
+    margin: 12px auto 30px auto;
+    line-height: 36px;
+}
+
+#list ul li {
+    position: relative;
+    text-indent: 150px;
+}
+
+#list ul li a {
+    height: 36px;
+    display: block;
+    padding: 0 20px 0 0;
+    color: #4d4d4d;
+    font-size: 14px;
+    text-decoration: none;
+    background: url(../images/line_bg.png) no-repeat center bottom;
+}
+
+#list ul li a:hover {
+    background: url(../images/ico_bg.png) no-repeat -358px -87px;
+}
+
+#list ul li.now a,
+#list ul li.now a:hover {
+    color: #fff;
+    background: url(../images/ico_bg.png) no-repeat -358px -123px;
+}
+
+#list ul li.now a,
+#list ul li.now span {
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+#list ul li span {
+    display: block;
+    position: absolute;
+    width: 50px;
+    right: 0;
+    top: 0;
+    font-size: 12px;
+    color: #a5a5a5;
+    text-align: right;
+    padding-right: 10px;
+}
+
+#list div {
+    width: 358px;
+    height: 19px;
+    position: absolute;
+    left: 0;
+    bottom: -17px;
+    background: url(../images/ico_bg.png) no-repeat -358px -189px;
+}
+
+#list div span {
+    display: block;
+    margin: 0 auto;
+    width: 70px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#lrc {
+    width: 600px;
+    margin: 30px auto 0 auto;
+    height: 370px;
+    overflow: hidden;
+    font-size: 12px;
+    position: relative;
+    font-size: 16px;
+    color: #1a1a1a;
+    text-align: center;
+}
+#lrc ul {
+    margin: 0;
+    position: absolute;
+    width: 600px;
+    top: 0;
+    left: 0;
+}
+#lrc ul li {
+    list-style-type: none;
+    line-height: 30px;  
+}
+#lrc li.now {
+    color: #df1d74;
+    font-size: 24px;
+    line-height: 40px;
+}
+
+
+.info {
+    width: 600px;
+    margin: 130px auto 0;
+}
+
+.info h1 {
+    font-size: 32px;
+}
