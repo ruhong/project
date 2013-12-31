@@ -9,164 +9,8 @@
 <meta name="baidu-tc-cerfication" content="455f7f6ad9099f97659c19c1d1bd1bbb" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link href="//yangpijuan.qiniudn.com/style/global.min.css" rel="stylesheet"/>
-<script src="//yangpijuan.qiniudn.com/jquery/jquery-1.8.3.min.js"></script>
-<script src="//yangpijuan.qiniudn.com/jquery/jquery.xdomainrequest.min.js"></script>
-<script src="//yangpijuan.qiniudn.com/jquery/jquery.jplayer.min.js"></script>
-<script src="//yangpijuan.qiniudn.com/jquery/jquery.backstretch.min.js"></script>
-<script>
-$(document).ready(function(){
-    jQuery.support.cors = true;
-    var txt,
-        lrc,
-        lrcTime,
-        nowMusic = 0,
-        timeUpdateCounter = 0;
-
-    getLrc($("#list>ul>li:eq(0)>a>em").html());
-    $("#jp-title").empty().append($("#list>ul>li:eq(0)>a>em").html());
-
-    $("#list>ul>li:eq(0)").addClass("now");
-
-    // 获取歌词
-    function getLrc(l) {
-	    $("#lrc>ul").empty();
-        txt = [];
-        lrc = [];
-        lrcTime = [];
-	    $.ajax({
-	    	type: "GET",
-	    	url: "//yangpijuan.qiniudn.com/lrc/"+ encodeURI(l) + ".lrc",
-	    	dataType: "text",
-	    	success: function(data){
-                var i = 0,
-                    j = 0,
-                    len = 0,
-                    tmp = '',
-                    time1 = 0,
-                    time2 = 0;
-
-		    	txt = data.split("\n");
-                len = txt.length;
-		    	for (; i < len; i++) {
-		    		tmp = txt[i].substr(10);
-		    		if(tmp){
-		    			lrc[j] = [];
-                        time1 = txt[i].substr(1,8).split(":");
-                        time2 = Math.floor(time1[0]) * 60 + Math.floor(time1[1]);
-				    	lrc[j][0] = time2;
-				    	lrc[j][1] = tmp;
-						if(j==0){
-							$("#lrc>ul").append("<li class='now'>" + tmp +"</li>");
-						}else{
-							$("#lrc>ul").append("<li>" + tmp +"</li>");
-						}
-				    	j++;
-		    		}
-
-		    	}
-		    
-		    	$("#lrc>div").hide();
-	    	}
-	    });
-    }
-
-    // 播放初始化
-    $("#jplayer").jPlayer({
-    	ready: function (event) {
-	    	$(this).jPlayer("setMedia", {
-	        	mp3:"//yangpijuan.qiniudn.com/music/" + encodeURI($("#list>ul>li:eq(0)>a>em").html()) + ".mp3"
-	    	}).jPlayer('volume',0.5);
-    	},
-    	timeupdate : function (obj){
-            var time1 = Math.floor(obj.jPlayer.status.currentTime);    
-
-            for (var i = timeUpdateCounter; i < lrc.length; i++) {
-            	if (time1 === lrc[i][0]) {    
-		            $("#lrc>ul>li").removeClass().eq(i).addClass("now");
-		            if(i>5){
-		            	$("#lrc>ul").animate({"top":  -30 * (i-5) + "px"},400);   
-		            }
-                    timeUpdateCounter++;
-		            break;
-            	}
-            }
-            
-        },
-            
-        ended: function (event) {
-			$(".jp-pause").css({"display":"none"});
-			$("#lrc>ul").css("top","0");
-			$("#lrc>ul>li").eq(0).addClass("now").siblings("li").removeClass();
-			
-        },
-    swfPath: "//yangpijuan.qiniudn.com/jquery",
-    supplied: "mp3",
-    wmode: "window"
-    });    
-
-    $('#jplayer').bind($.jPlayer.event.seeked, function(){
-        timeUpdateCounter = 0;
-    });
-
-    // 列表切换
-    $("#list>ul>li>a").click(function () {
-        timeUpdateCounter = 0;
-        
-    	var music = $(this).children("em").html();
-    	$("#lrc>div").show();
-    	getLrc(music);
-    	$("#lrc>ul").css("top","0");
-    	$("#jplayer").jPlayer("clearMedia").jPlayer("setMedia",{mp3:"//yangpijuan.qiniudn.com/music/" + encodeURI(music) + ".mp3"}).jPlayer('volume', 0.5).jPlayer("play");
-    	$(this).parent().addClass("now").siblings("li").removeClass();
-   	 	$("#jp-title").empty().append(music);
-    	nowMusic = $(this).parent().index();
-    });
-
-    // 列表显示隐藏
-    var _top = $("#list").height();
-    $("#list").css("top", (_top - 9) * (-1) + "px");
-
-    $("#list").click(function(){
-		$(this).stop(true).animate({
-            "top": "0"
-         },400);
-    }).mouseleave(function(){
-        $(this).stop(true).animate({
-        "top": (_top - 9) * (-1) + "px"
-        },400);
-    });
-	
-	$('.J-volume').click(function(){
-		var $this = $(this);
-		if($this.hasClass('icon-volume-medium')){
-			$("#jplayer").jPlayer("volume", 0.8);
-			$this.removeClass('icon-volume-medium').addClass('icon-volume-high');
-			
-		}else{
-			$("#jplayer").jPlayer("volume", 0.5);
-			$this.removeClass('icon-volume-high').addClass('icon-volume-medium');
-		}
-	});
-	$('.jp-controls').hover(function(){
-        $('.J-home, .J-volume, .J-about').css('visibility','visible');
-    },function(){
-        $('.J-home, .J-volume, .J-about').css('visibility','hidden');
-    });
-	$.backstretch([
-		    "//yangpijuan.qiniudn.com/1.jpg",
-            "//yangpijuan.qiniudn.com/2.jpg",
-            "//yangpijuan.qiniudn.com/3.jpg",
-            "//yangpijuan.qiniudn.com/4.jpg",
-            "//yangpijuan.qiniudn.com/5.jpg",
-            "//yangpijuan.qiniudn.com/6.jpg"
-		], {
-			fade: 750,
-			duration: 30000});
-});
-
-</script>
-
 </head>
+
 <body>
     <div id="jplayer"></div>
     <div id="jp_container_1" class="jp-audio">
@@ -218,6 +62,163 @@ $(document).ready(function(){
     	<div></div>
     	<ul></ul>
     </div>
+
+    <script src="//yangpijuan.qiniudn.com/jquery/jquery-1.8.3.min.js"></script>
+    <script src="//yangpijuan.qiniudn.com/jquery/jquery.xdomainrequest.min.js"></script>
+    <script src="//yangpijuan.qiniudn.com/jquery/jquery.jplayer.min.js"></script>
+    <script src="//yangpijuan.qiniudn.com/jquery/jquery.backstretch.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        jQuery.support.cors = true;
+        var txt,
+            lrc,
+            lrcTime,
+            nowMusic = 0,
+            timeUpdateCounter = 0;
+
+        getLrc($("#list>ul>li:eq(0)>a>em").html());
+        $("#jp-title").empty().append($("#list>ul>li:eq(0)>a>em").html());
+
+        $("#list>ul>li:eq(0)").addClass("now");
+
+        // 获取歌词
+        function getLrc(l) {
+            $("#lrc>ul").empty();
+            txt = [];
+            lrc = [];
+            lrcTime = [];
+            $.ajax({
+                type: "GET",
+                url: "//yangpijuan.qiniudn.com/lrc/"+ encodeURI(l) + ".lrc",
+                dataType: "text",
+                success: function(data){
+                    var i = 0,
+                        j = 0,
+                        len = 0,
+                        tmp = '',
+                        time1 = 0,
+                        time2 = 0;
+
+                    txt = data.split("\n");
+                    len = txt.length;
+                    for (; i < len; i++) {
+                        tmp = txt[i].substr(10);
+                        if(tmp){
+                            lrc[j] = [];
+                            time1 = txt[i].substr(1,8).split(":");
+                            time2 = Math.floor(time1[0]) * 60 + Math.floor(time1[1]);
+                            lrc[j][0] = time2;
+                            lrc[j][1] = tmp;
+                            if(j==0){
+                                $("#lrc>ul").append("<li class='now'>" + tmp +"</li>");
+                            }else{
+                                $("#lrc>ul").append("<li>" + tmp +"</li>");
+                            }
+                            j++;
+                        }
+
+                    }
+                
+                    $("#lrc>div").hide();
+                }
+            });
+        }
+
+        // 播放初始化
+        $("#jplayer").jPlayer({
+            ready: function (event) {
+                $(this).jPlayer("setMedia", {
+                    mp3:"//yangpijuan.qiniudn.com/music/" + encodeURI($("#list>ul>li:eq(0)>a>em").html()) + ".mp3"
+                }).jPlayer('volume',0.5);
+            },
+            timeupdate : function (obj){
+                var time1 = Math.floor(obj.jPlayer.status.currentTime);    
+
+                for (var i = timeUpdateCounter; i < lrc.length; i++) {
+                    if (time1 === lrc[i][0]) {    
+                        $("#lrc>ul>li").removeClass().eq(i).addClass("now");
+                        if(i>5){
+                            $("#lrc>ul").animate({"top":  -30 * (i-5) + "px"},400);   
+                        }
+                        timeUpdateCounter++;
+                        break;
+                    }
+                }
+                
+            },
+                
+            ended: function (event) {
+                $(".jp-pause").css({"display":"none"});
+                $("#lrc>ul").css("top","0");
+                $("#lrc>ul>li").eq(0).addClass("now").siblings("li").removeClass();
+                
+            },
+        swfPath: "//yangpijuan.qiniudn.com/jquery",
+        supplied: "mp3",
+        wmode: "window"
+        });    
+
+        $('#jplayer').bind($.jPlayer.event.seeked, function(){
+            timeUpdateCounter = 0;
+        });
+
+        // 列表切换
+        $("#list>ul>li>a").click(function () {
+            timeUpdateCounter = 0;
+            
+            var music = $(this).children("em").html();
+            $("#lrc>div").show();
+            getLrc(music);
+            $("#lrc>ul").css("top","0");
+            $("#jplayer").jPlayer("clearMedia").jPlayer("setMedia",{mp3:"//yangpijuan.qiniudn.com/music/" + encodeURI(music) + ".mp3"}).jPlayer('volume', 0.5).jPlayer("play");
+            $(this).parent().addClass("now").siblings("li").removeClass();
+            $("#jp-title").empty().append(music);
+            nowMusic = $(this).parent().index();
+        });
+
+        // 列表显示隐藏
+        var _top = $("#list").height();
+        $("#list").css("top", (_top - 9) * (-1) + "px");
+
+        $("#list").click(function(){
+            $(this).stop(true).animate({
+                "top": "0"
+             },400);
+        }).mouseleave(function(){
+            $(this).stop(true).animate({
+            "top": (_top - 9) * (-1) + "px"
+            },400);
+        });
+        
+        $('.J-volume').click(function(){
+            var $this = $(this);
+            if($this.hasClass('icon-volume-medium')){
+                $("#jplayer").jPlayer("volume", 0.8);
+                $this.removeClass('icon-volume-medium').addClass('icon-volume-high');
+                
+            }else{
+                $("#jplayer").jPlayer("volume", 0.5);
+                $this.removeClass('icon-volume-high').addClass('icon-volume-medium');
+            }
+        });
+        $('.jp-controls').hover(function(){
+            $('.J-home, .J-volume, .J-about').css('visibility','visible');
+        },function(){
+            $('.J-home, .J-volume, .J-about').css('visibility','hidden');
+        });
+        $.backstretch([
+                "//yangpijuan.qiniudn.com/1.jpg",
+                "//yangpijuan.qiniudn.com/2.jpg",
+                "//yangpijuan.qiniudn.com/3.jpg",
+                "//yangpijuan.qiniudn.com/4.jpg",
+                "//yangpijuan.qiniudn.com/5.jpg",
+                "//yangpijuan.qiniudn.com/6.jpg"
+            ], {
+                fade: 750,
+                duration: 30000});
+    });
+
+    </script>
 
 </body>
 
