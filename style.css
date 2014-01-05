@@ -1840,31 +1840,37 @@ ul.tabs:after {
 	padding: 20px 20px 0 20px;
 }
 
+.blog_video{
+	width: 400px;
+	height: 340px;
+}
+
+
 /* CHROME FIX */
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
-input#submit,
-.forms fieldset .btn-submit  {
-	height: 28px;
-}
-a.button,
-.page-navi li a,
-#nav-single .nav-prev .meta-nav-prev,
-#nav-single .nav-next .meta-nav-next {
-	height: 27px;
-}
+	input#submit,
+	.forms fieldset .btn-submit  {
+		height: 28px;
+	}
+	a.button,
+	.page-navi li a,
+	#nav-single .nav-prev .meta-nav-prev,
+	#nav-single .nav-next .meta-nav-next {
+		height: 27px;
+	}
 }
 
 /* OPERA FIX */
 @media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) {
-input#submit,
-.forms fieldset .btn-submit  {
-	height: 28px;
-	padding-top: 3px;
-}
-a.button,
-.page-navi li a,
-#nav-single .nav-prev .meta-nav-prev,
-#nav-single .nav-next .meta-nav-next {
-	height: 27px;
-}
+	input#submit,
+	.forms fieldset .btn-submit  {
+		height: 28px;
+		padding-top: 3px;
+	}
+	a.button,
+	.page-navi li a,
+	#nav-single .nav-prev .meta-nav-prev,
+	#nav-single .nav-next .meta-nav-next {
+		height: 27px;
+	}
 }

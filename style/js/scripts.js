@@ -20,24 +20,6 @@ var isMobile = (function(){
     return (device.Android() || device.BlackBerry() || device.iOS() || device.Windows());  
 })();
 /*-----------------------------------------------------------------------------------*/
-/*  SELECTNAV
-/*-----------------------------------------------------------------------------------*/
-
-$(document).ready(function() {
-    selectnav('tiny', {
-        label: '--- 导航 --- ',
-        indent: '-'
-    });
-});
-/*-----------------------------------------------------------------------------------*/
-/*  FitVids
-/*-----------------------------------------------------------------------------------*/
- 
-$(document).ready(function(){
-    //$('#content').fitVids();
-});
-
-/*-----------------------------------------------------------------------------------*/
 /*  动态插入代码
 /*-----------------------------------------------------------------------------------*/
 $(document).ready(function(){
@@ -54,6 +36,6 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	$(document).bind('contextmenu selectstart dragstart', function(){
-		return false;
+		//return false;
 	});
 });
