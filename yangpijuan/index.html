@@ -66,19 +66,28 @@
     <script src="//yangpijuan.qiniudn.com/jquery/jquery.xdomainrequest.min.js"></script>
     <script src="//yangpijuan.qiniudn.com/jquery/jquery.jplayer.min.js"></script>
     <script src="//yangpijuan.qiniudn.com/jquery/jquery.backstretch.min.js"></script>
+    <script src="//yangpijuan.qiniudn.com/jquery/jquery.cookie.min.js"></script>
+
     <script>
     $(document).ready(function(){
         jQuery.support.cors = true;
         var txt,
             lrc,
             lrcTime,
-            nowMusic = 0,
+            lastMusic = 0,
             timeUpdateCounter = 0;
+		
+		if(!$.cookie('lastMusic')){
+			lastMusic = 0;
+			$.cookie('lastMusic', lastMusic);
+		}else{
+			lastMusic = $.cookie('lastMusic');
+		}
+		
+        getLrc($("#list>ul>li:eq("+lastMusic+")>a>em").html());
+        $("#jp-title").empty().append($("#list>ul>li:eq("+lastMusic+")>a>em").html());
 
-        getLrc($("#list>ul>li:eq(0)>a>em").html());
-        $("#jp-title").empty().append($("#list>ul>li:eq(0)>a>em").html());
-
-        $("#list>ul>li:eq(0)").addClass("now");
+        $("#list>ul>li:eq("+lastMusic+")").addClass("now");
 
         // 获取歌词
         function getLrc(l) {
@@ -127,7 +136,7 @@
         $("#jplayer").jPlayer({
             ready: function (event) {
                 $(this).jPlayer("setMedia", {
-                    mp3:"//yangpijuan.qiniudn.com/music/" + encodeURI($("#list>ul>li:eq(0)>a>em").html()) + ".mp3"
+                    mp3:"//yangpijuan.qiniudn.com/music/" + encodeURI($("#list>ul>li:eq("+lastMusic+")>a>em").html()) + ".mp3"
                 }).jPlayer('volume',0.5);
             },
             timeupdate : function (obj){
@@ -172,7 +181,8 @@
             $("#jplayer").jPlayer("clearMedia").jPlayer("setMedia",{mp3:"//yangpijuan.qiniudn.com/music/" + encodeURI(music) + ".mp3"}).jPlayer('volume', 0.5).jPlayer("play");
             $(this).parent().addClass("now").siblings("li").removeClass();
             $("#jp-title").empty().append(music);
-            nowMusic = $(this).parent().index();
+            lastMusic = $(this).parent().index();
+			$.cookie('lastMusic', lastMusic);
         });
 
         // 列表显示隐藏
@@ -215,6 +225,7 @@
             ], {
                 fade: 750,
                 duration: 40000});
+		
     });
 
     </script>
